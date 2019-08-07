@@ -7,6 +7,8 @@
 	if ($rowcount == 1) {
 		$_SESSION['username'] = $_POST['username'];
 		header('location: ../index.php');
+		// Update Status user When available
+		mysql_query("UPDATE user SET status=1 WHERE username='$_POST[username]'");
 	}
 	else {
 		header('location: ../form-login.php');	

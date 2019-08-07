@@ -1,4 +1,7 @@
-<!doctype html>
+<?php 
+include 'connection.php';
+?>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -78,6 +81,27 @@
             <div class="card-body">
               <label>User</label>
               <input type="text" name="username" class="form-control" value="" readonly>
+              <table class="table mt-2" width="100%">
+                <?php 
+                $query = mysql_query("SELECT * FROM user");
+                $queryCount = mysql_num_rows($query);
+                if ($queryCount >= 1) {
+                  while ($data = mysql_fetch_array($query)) {
+                    if ($data['status'] == 1) {
+                      $status = '<span class="badge badge-success">Online</span>';
+                    }else{
+                      $status = '<span class="badge badge-danger">Offline</span>';
+                    }
+                  ?>
+                  <tr>
+                    <td><?php echo $data['username'] ?></td>
+                    <td><?php echo $status ?></td>
+                  </tr>
+                  <?php
+                  }
+                }
+                ?>
+              </table>
             </div>
           </div>
         </div>
